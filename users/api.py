@@ -1,4 +1,5 @@
 from django.core.mail import send_mail
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -20,7 +21,10 @@ class EmailView(APIView):
         user_email = serializer.data.get("email")
 
         if is_code_in_redis(user_email):
-            return Response({"msg": "please wait  120 seconds"})
+            return Response(
+                {"msg": "please wait  120 seconds"},
+                status=status.HTTP_202_ACCEPTED,
+            )
 
         code = generate_verification_code()
         set_verification_code(user_email, code)
