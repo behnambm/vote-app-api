@@ -128,3 +128,7 @@ REST_FRAMEWORK = {
         'email': '5/min',
     }
 }
+
+REDIS_HOST = config('REDIS_HOST')
+REDIS_PORT = config('REDIS_PORT')
+VERIFICATION_CODE_EXPIRY = config('VERIFICATION_CODE_EXPIRY')
