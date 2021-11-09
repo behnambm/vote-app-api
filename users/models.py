@@ -7,4 +7,4 @@ class Emails(models.Model):
     is_active = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return self.email + '(' + self.verify_key + ')'
+        return self.email + "(" + self.verify_key + ")"

@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.text import slugify
-
 from users.models import Emails
 
 
@@ -20,10 +19,13 @@ class Votes(models.Model):
 
 
 class Voters(models.Model):
-    voter = models.ForeignKey(to=Emails, related_name='votes', on_delete=models.CASCADE)
-    vote = models.ForeignKey(to=Votes, related_name='voters', on_delete=models.CASCADE)
+    voter = models.ForeignKey(
+        to=Emails, related_name="votes", on_delete=models.CASCADE
+    )
+    vote = models.ForeignKey(
+        to=Votes, related_name="voters", on_delete=models.CASCADE
+    )
     user_choice = models.CharField(max_length=256)
 
     def __str__(self) -> str:
         return f"{self.voter.email} ({self.user_choice})"
-
