@@ -1,0 +1,15 @@
+{
+  "[python]": {
+    "editor.defaultFormatter": null,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+    }
+  },
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": [
+    "--line-length=80"
+  ],
+  "editor.formatOnSave": true,
+  "python.linting.lintOnSave": true,
+}
