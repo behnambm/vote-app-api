@@ -117,7 +117,7 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_CLASSES": [
@@ -133,3 +133,10 @@ REDIS_PORT = config("REDIS_PORT")
 VERIFICATION_CODE_EXPIRY = config("VERIFICATION_CODE_EXPIRY")
 
 CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
+
+DEFAULT_FROM_EMAIL = "Vote App <vote@no-reply.com>"
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = config("EMAIL_PORT")
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
