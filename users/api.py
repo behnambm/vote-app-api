@@ -1,9 +1,9 @@
-from django.core.mail import send_mail
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializer import EmailSerializer
+from .tasks import send_verification_code
 from .utils import (
     generate_verification_code,
     is_code_in_redis,
@@ -28,11 +28,6 @@ class EmailView(APIView):
 
         code = generate_verification_code()
         set_verification_code(user_email, code)
-        # TODO: use celery to send email
-        send_mail(
-            "test",
-            f"the code is {code}",
-            "behnam@gmail.com",
-            ["test@gmail.com"],
-        )
+        send_verification_code.delay(email=user_email, code=code)
+
         return Response({"msg": f"your code {code} -> {user_email}"})
