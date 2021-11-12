@@ -50,5 +50,8 @@ def is_code_correct(email: str, user_provided_code: str) -> bool:
     Returns:
         bool: if the code in Redis is equal to user provided code then return True
     """
-    code_in_db = r.get(email).decode()
-    return str(user_provided_code) == code_in_db
+    try:
+        code_in_db = r.get(email).decode()
+        return str(user_provided_code) == str(code_in_db)
+    except AttributeError:
+        return False
