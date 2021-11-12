@@ -7,4 +7,4 @@ class Emails(models.Model):
     verified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.email + "(" + self.is_active + ")"
+        return f"{self.email} (active: {self.is_active})"
