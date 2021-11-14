@@ -1,8 +1,8 @@
 from django.urls import path
 
-from .api import ListOfVotersView, ListOfVotesView
+from .api import ListOfVotersView, VotesView
 
 urlpatterns = [
-    path("vote/", ListOfVotesView.as_view()),
+    path("vote/", VotesView.as_view()),
     path("voter/", ListOfVotersView.as_view()),
 ]
