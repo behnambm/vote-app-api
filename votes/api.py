@@ -6,7 +6,7 @@ from users.models import Emails
 
 from .models import Voters, Votes
 from .permission import ActiveEmailOnly
-from .serializer import VotersSerializer, VotesSerializer, VoteUpdateSerializer
+from .serializer import VotesSerializer, VoteUpdateSerializer
 
 
 class VotesView(APIView):
@@ -79,10 +79,3 @@ class VotesView(APIView):
         voter.save()
 
         return Response({"detail": "successful"})
-
-
-class ListOfVotersView(APIView):
-    def get(self, request):
-        voters = Voters.objects.all()
-        serializer = VotersSerializer(instance=voters, many=True)
-        return Response(serializer.data)
