@@ -16,14 +16,14 @@ def generate_verification_code() -> str:
     return "".join(random.choices(string.digits + string.digits, k=6))
 
 
-def set_verification_code(email: str, code: str) -> None:
+def set_verification_code(email: str, code: str) -> bool:
     """Set a key and value in Redis
 
     Args:
         email (str): The key that will be used to save code in Redis
         code (str): A random 6-digit string
     """
-    r.set(email, code, ex=settings.VERIFICATION_CODE_EXPIRY)
+    return r.set(email, code, ex=settings.VERIFICATION_CODE_EXPIRY)
 
 
 def is_code_in_redis(email: str) -> bool:
