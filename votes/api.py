@@ -72,10 +72,15 @@ class VotesView(APIView):
             voter.user_choice = serializer.data.get("user_choice")
         except Voters.DoesNotExist:
             voter = Voters(
-                voter=email_obj.id,
+                voter=email_obj,
                 vote=user_vote,
                 user_choice=serializer.data.get("user_choice"),
             )
         voter.save()
 
-        return Response({"detail": "successful"})
+        return Response(
+            {
+                "detail": "successful",
+                "user_choice": serializer.data.get("user_choice"),
+            }
+        )
