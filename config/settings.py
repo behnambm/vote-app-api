@@ -124,7 +124,7 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.ScopedRateThrottle",
     ],
     "DEFAULT_THROTTLE_RATES": {
-        "email": "5/min",
+        "email": "20/min",
     },
 }
 
