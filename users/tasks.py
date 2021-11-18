@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 
 
 @shared_task(bind=True)
-def send_verification_code(self, email: str, code: str) -> None:
+def send_verification_code(self, email: str, code: str) -> int:
     """send emails containing verification code
 
     Args:
