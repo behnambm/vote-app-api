@@ -24,7 +24,7 @@ class EmailView(APIView):
 
         if is_code_in_redis(user_email):
             return Response(
-                {"msg": "please wait  120 seconds"},
+                {"detail": "please wait 120 seconds"},
                 status=status.HTTP_202_ACCEPTED,
             )
 
