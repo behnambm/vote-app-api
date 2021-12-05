@@ -8,8 +8,12 @@ from rest_framework.views import APIView
 from .models import Emails
 from .serializer import CheckVerificationCodeSerializer, EmailSerializer
 from .tasks import send_verification_code
-from .utils import (generate_verification_code, is_code_correct,
-                    is_code_in_redis, set_verification_code)
+from .utils import (
+    generate_verification_code,
+    is_code_correct,
+    is_code_in_redis,
+    set_verification_code,
+)
 
 
 class EmailView(APIView):
@@ -73,6 +77,40 @@ class EmailView(APIView):
 class CheckVerificationCodeView(APIView):
     throttle_scope = "email"
 
+    @swagger_auto_schema(
+        operation_id="Check verification code",
+        operation_description=f"""
+        Checks whether the code is valid or not
+        
+        Example code: `234879`
+        """,
+        request_body=CheckVerificationCodeSerializer,
+        responses={
+            200: openapi.Response(
+                description="Email is verified.",
+                examples={"application/json": {"detail": "successful"}},
+            ),
+            401: openapi.Response(
+                description=f"Provided code is not correct",
+                examples={
+                    "application/json": {"detail": "Code is not correct"}
+                },
+            ),
+            400: openapi.Response(
+                description="invalid email",
+                examples={
+                    "application/json": {
+                        "email": ["Enter a valid email address."],
+                        "code": [
+                            "Only digits are allowed",
+                            "Code is only 6 digits long",
+                        ],
+                    }
+                },
+            ),
+        },
+        security=[],
+    )
     def post(self, request):
         serializer = CheckVerificationCodeSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
