@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     # locals
     "users",
     "votes",
+    # 3rd party
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
