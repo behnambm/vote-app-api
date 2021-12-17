@@ -22,4 +22,4 @@ cur.execute(
 )
 cur.close()
 con.close()
-print("Adding Trigger function was successfull.")
+print("Adding Trigger function was successful.")
