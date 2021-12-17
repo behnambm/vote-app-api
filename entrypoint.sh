@@ -6,6 +6,7 @@ then
     python manage.py migrate 
     python add_trigger_function_sql.py
     python manage.py createsuperuser --email admin@local.com --username admin --no-input
+    python manage.py collectstatic --no-input
 fi
 
 # check redis connection
